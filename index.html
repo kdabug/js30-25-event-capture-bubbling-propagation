@@ -37,6 +37,32 @@
     </style>
 
     <button></button>
-    <script></script>
+    <script>
+      const divs = document.querySelectorAll("div");
+      const button = document.querySelector("button");
+      function logText(e) {
+        //console.log(this)
+        console.log(this.classList.value);
+        // e.stopPropagation(); // stop bubbling!
+      }
+      //document.body.addEventListener('click', logText)
+      divs.forEach(div =>
+        div.addEventListener("click", logText, {
+          // capture: true, //means you will run the function on the way down rather than on the way up through the elements
+          capture: false, //default, will run the funtion on the way up after identifying the right element
+          once: true
+        })
+      );
+      button.addEventListener(
+        "click",
+        () => {
+          console.log("Click!!!");
+        },
+        {
+          //can use in store checkouts (to prevent users from racking up the charges)
+          once: true //listen for event and REMOVE (unbind) itself...will never run again
+        }
+      );
+    </script>
   </body>
 </html>
